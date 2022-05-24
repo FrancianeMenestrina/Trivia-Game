@@ -36,6 +36,7 @@ export default class Login extends Component {
 
   render() {
     const { buttonDisable } = this.state;
+    const { history } = this.props;
     return (
       <main>
         <h2>Login</h2>
@@ -67,6 +68,13 @@ export default class Login extends Component {
             onClick={ this.handleButton }
           >
             Play
+          </button>
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => { history.push('/settings'); } }
+          >
+            Settings
           </button>
         </form>
       </main>
