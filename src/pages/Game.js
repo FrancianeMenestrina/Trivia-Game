@@ -4,14 +4,14 @@ class Game extends Component {
   constructor() {
     super();
     this.state = {
-      nome: '',
+      name: '',
     };
   }
 
   render() {
-    const { nome } = this.state;
+    const { name } = this.state;
     return (
-      <p>{ nome }</p>
+      <p>{ name }</p>
     );
   }
 }
