@@ -11,7 +11,12 @@ class Game extends Component {
   render() {
     const { name } = this.state;
     return (
-      <p>{ name }</p>
+      <div>
+        <p>{ name }</p>
+        <h1>GAME</h1>
+
+      </div>
+
     );
   }
 }

@@ -19,7 +19,7 @@ export default class Login extends Component {
   handleButton = async () => {
     const response = await fetch('https://opentdb.com/api_token.php?command=request');
     const data = await response.json();
-    console.log('data', data);
+    // console.log('data', data);
     localStorage.setItem('token', data.token);
     const { history } = this.props;
     history.push('/game');
