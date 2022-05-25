@@ -5,12 +5,13 @@ import { actionRequestApi } from '../redux/actions';
 import Questions from '../components/Questions';
 
 class Game extends Component {
-/*   constructor() {
+  constructor() {
     super();
     this.state = {
-      name: '',
+      soma: 0,
     };
-  } */
+  }
+
   componentDidMount() {
     const { returnApiFunc, history } = this.props;
     returnApiFunc();
@@ -22,10 +23,18 @@ class Game extends Component {
     }
   }
 
+  onClickNext = () => {
+    const { soma } = this.state;
+    this.setState({
+      soma: soma + 1,
+    });
+  }
+
   render() {
     const data = JSON.parse(localStorage.getItem('ranking'));
     // console.log('data', data);
     const { questions } = this.props;
+    const { soma } = this.state;
     return (
       <div>
         <header />
@@ -38,7 +47,7 @@ class Game extends Component {
         <p data-testid="header-player-name">{ data[0].name }</p>
         <p data-testid="header-score">{ data[0].score }</p>
         <div>
-          <Questions questions={ questions[0] } />
+          <Questions questions={ questions[soma] } onClickNext={ this.onClickNext } />
         </div>
       </div>
     );

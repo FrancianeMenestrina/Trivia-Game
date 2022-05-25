@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 class Questions extends Component {
   constructor() {
@@ -17,7 +17,7 @@ class Questions extends Component {
   }
 
   componentDidMount = () => {
-    const TIMER = 10;
+    const TIMER = 1000;
     setTimeout(() => {
       const ordemAleatoria = this.ordemAleatoria();
       this.setState({ respostas: ordemAleatoria });
@@ -43,6 +43,7 @@ class Questions extends Component {
 
   ordemAleatoria = () => {
     const { questions } = this.props;
+    console.log('questions', questions);
     if (!questions) {
       return null;
     }
@@ -62,9 +63,9 @@ class Questions extends Component {
   }
 
   render() {
-    const { questions } = this.props;
+    const { questions, onClickNext } = this.props;
     const { css, respostas, disable, countDown, over, btnNext } = this.state;
-    // console.log(questions);
+    // console.log(questionsTest[0]);
     return (
       <div>
         {!questions ? null : (
@@ -105,7 +106,7 @@ class Questions extends Component {
                 )),
               )}
             </div>
-            { btnNext && (<button data-testid="btn-next" type="button">Next</button>)}
+            { btnNext && (<button data-testid="btn-next" type="submit" onClick={ onClickNext }>Next</button>)}
           </div>
         )}
       </div>
@@ -114,7 +115,7 @@ class Questions extends Component {
 }
 
 // const mapStateToProps = (state) => ({
-//   questions: state.playerReducer.questions,
+//   questionsTest: state.playerReducer.questions,
 // });
 
 Questions.propTypes = {
