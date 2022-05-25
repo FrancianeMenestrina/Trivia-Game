@@ -9,15 +9,33 @@ class Questions extends Component {
     this.state = {
       css: false,
       respostas: [],
+      countDown: 5,
+      disable: false,
     };
   }
 
   componentDidMount = () => {
-    const TIMER = 0;
+    const TIMER = 1000;
     setTimeout(() => {
       const ordemAleatoria = this.ordemAleatoria();
       this.setState({ respostas: ordemAleatoria });
     }, TIMER);
+    const ONE_SECOND = 1000;
+    this.intervalId = setInterval(() => {
+      this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
+    }, ONE_SECOND);
+  }
+
+  /* componentDidUpdate() {
+    const TIME_LIMIT = 0;
+    const { countDown } = this.state;
+    if (countDown === TIME_LIMIT) {
+      this.setState({ disable: true });
+    }
+  }
+ */
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
   }
 
   ordemAleatoria = () => {
@@ -41,12 +59,13 @@ class Questions extends Component {
 
   render() {
     const { questions } = this.props;
-    const { css, respostas } = this.state;
+    const { css, respostas, disable, countDown } = this.state;
     // console.log(questions);
     return (
       <div>
         {!questions ? null : (
           <div>
+            <p>{countDown}</p>
             <p data-testid="question-category">{questions.category}</p>
             <p data-testid="question-text">{questions.question}</p>
             <div data-testid="answer-options">
@@ -55,6 +74,7 @@ class Questions extends Component {
                   <button
                     type="button"
                     key={ index }
+                    disabled={ disable }
                     data-testid="correct-answer"
                     onClick={ this.handleOnClick }
                     style={
@@ -69,6 +89,7 @@ class Questions extends Component {
                   <button
                     type="button"
                     key={ index }
+                    disabled={ disable }
                     data-testid={ `wrong-answer-${index}` }
                     onClick={ this.handleOnClick }
                     style={
