@@ -12,6 +12,7 @@ class Questions extends Component {
       countDown: 30,
       disable: false,
       over: false,
+      btnNext: false,
     };
   }
 
@@ -31,7 +32,7 @@ class Questions extends Component {
     const TIME_LIMIT = 0;
     const { countDown } = this.state;
     if (countDown === TIME_LIMIT) {
-      this.setState({ disable: true, countDown: 30, over: true });
+      this.setState({ disable: true, countDown: 30, over: true, btnNext: true });
       clearInterval(this.intervalId);
     }
   }
@@ -56,12 +57,13 @@ class Questions extends Component {
   }
 
   handleOnClick = () => {
-    this.setState({ css: true });
+    this.setState({ css: true, btnNext: true });
+    clearInterval(this.intervalId);
   }
 
   render() {
     const { questions } = this.props;
-    const { css, respostas, disable, countDown, over } = this.state;
+    const { css, respostas, disable, countDown, over, btnNext } = this.state;
     // console.log(questions);
     return (
       <div>
@@ -103,6 +105,7 @@ class Questions extends Component {
                 )),
               )}
             </div>
+            { btnNext && (<button data-testid="btn-next" type="button">Next</button>)}
           </div>
         )}
       </div>
