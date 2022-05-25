@@ -9,13 +9,14 @@ class Questions extends Component {
     this.state = {
       css: false,
       respostas: [],
-      countDown: 5,
+      countDown: 30,
       disable: false,
+      over: false,
     };
   }
 
   componentDidMount = () => {
-    const TIMER = 1000;
+    const TIMER = 10;
     setTimeout(() => {
       const ordemAleatoria = this.ordemAleatoria();
       this.setState({ respostas: ordemAleatoria });
@@ -26,14 +27,15 @@ class Questions extends Component {
     }, ONE_SECOND);
   }
 
-  /* componentDidUpdate() {
+  componentDidUpdate() {
     const TIME_LIMIT = 0;
     const { countDown } = this.state;
     if (countDown === TIME_LIMIT) {
-      this.setState({ disable: true });
+      this.setState({ disable: true, countDown: 30, over: true });
+      clearInterval(this.intervalId);
     }
   }
- */
+
   componentWillUnmount() {
     clearInterval(this.intervalId);
   }
@@ -59,13 +61,13 @@ class Questions extends Component {
 
   render() {
     const { questions } = this.props;
-    const { css, respostas, disable, countDown } = this.state;
+    const { css, respostas, disable, countDown, over } = this.state;
     // console.log(questions);
     return (
       <div>
         {!questions ? null : (
           <div>
-            <p>{countDown}</p>
+            <p>{ over ? 'Game Over' : countDown }</p>
             <p data-testid="question-category">{questions.category}</p>
             <p data-testid="question-text">{questions.question}</p>
             <div data-testid="answer-options">
