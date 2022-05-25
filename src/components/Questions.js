@@ -3,6 +3,23 @@ import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 
 class Questions extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      css: false,
+      respostas: [],
+    };
+  }
+
+  componentDidMount = () => {
+    const TIMER = 0;
+    setTimeout(() => {
+      const ordemAleatoria = this.ordemAleatoria();
+      this.setState({ respostas: ordemAleatoria });
+    }, TIMER);
+  }
+
   ordemAleatoria = () => {
     const { questions } = this.props;
     if (!questions) {
@@ -11,45 +28,60 @@ class Questions extends Component {
     const arrayAnswers = [questions.correct_answer, ...questions.incorrect_answers];
     const ZERO_CINCO = 0.5;
     arrayAnswers.sort(() => Math.random() - ZERO_CINCO);
-    console.log(arrayAnswers);
+    if (arrayAnswers === [questions.correct_answer, ...questions.incorrect_answers]) {
+      arrayAnswers.sort(() => Math.random() - ZERO_CINCO);
+      return arrayAnswers;
+    }
     return arrayAnswers;
+  }
+
+  handleOnClick = () => {
+    this.setState({ css: true });
   }
 
   render() {
     const { questions } = this.props;
-    const ordemAleatoria = this.ordemAleatoria();
+    const { css, respostas } = this.state;
     // console.log(questions);
     return (
       <div>
-        { !questions ? null : (
+        {!questions ? null : (
           <div>
             <p data-testid="question-category">{questions.category}</p>
             <p data-testid="question-text">{questions.question}</p>
             <div data-testid="answer-options">
-              {
-                ordemAleatoria.map((resposta, index) => (
-                  questions.correct_answer === resposta ? (
-                    <button
-                      type="button"
-                      key={ index }
-                      data-testid="correct-answer"
-                    >
-                      {resposta}
-
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      key={ index }
-                      data-testid={ `wrong-answer-${index}` }
-                    >
-                      {resposta}
-                    </button>
-                  )))
-              }
+              {respostas.map(
+                (resposta, index) => (questions.correct_answer === resposta ? (
+                  <button
+                    type="button"
+                    key={ index }
+                    data-testid="correct-answer"
+                    onClick={ this.handleOnClick }
+                    style={
+                      css
+                        ? { border: '3px solid rgb(6, 240, 15)' }
+                        : { color: 'black' }
+                    }
+                  >
+                    {resposta}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    key={ index }
+                    data-testid={ `wrong-answer-${index}` }
+                    onClick={ this.handleOnClick }
+                    style={
+                      css ? { border: '3px solid red' } : { color: 'black' }
+                    }
+                  >
+                    {resposta}
+                  </button>
+                )),
+              )}
             </div>
           </div>
-        ) }
+        )}
       </div>
     );
   }
