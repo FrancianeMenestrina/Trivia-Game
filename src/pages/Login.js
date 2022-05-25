@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import md5 from 'crypto-js/md5';
 
 export default class Login extends Component {
   constructor() {
@@ -19,8 +20,20 @@ export default class Login extends Component {
   handleButton = async () => {
     const response = await fetch('https://opentdb.com/api_token.php?command=request');
     const data = await response.json();
-    // console.log('data', data);
-    localStorage.setItem('token', data.token);
+    const { name, gravatarEmail } = this.state;
+
+    const criptoEmail = md5(gravatarEmail).toString();
+
+    localStorage.setItem('info', JSON.stringify({
+      ranking: [
+        {
+          name,
+          score: 0,
+          picture: `https://www.gravatar.com/avatar/${criptoEmail}`,
+        },
+      ],
+      token: data.token,
+    }));
     const { history } = this.props;
     history.push('/game');
   }
