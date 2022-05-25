@@ -24,16 +24,14 @@ export default class Login extends Component {
 
     const criptoEmail = md5(gravatarEmail).toString();
 
-    localStorage.setItem('info', JSON.stringify({
-      ranking: [
-        {
-          name,
-          score: 0,
-          picture: `https://www.gravatar.com/avatar/${criptoEmail}`,
-        },
-      ],
-      token: data.token,
-    }));
+    localStorage.setItem('ranking', JSON.stringify([
+      {
+        name,
+        score: 0,
+        picture: `https://www.gravatar.com/avatar/${criptoEmail}`,
+      },
+    ]));
+    localStorage.setItem('token', data.token);
     const { history } = this.props;
     history.push('/game');
   }
