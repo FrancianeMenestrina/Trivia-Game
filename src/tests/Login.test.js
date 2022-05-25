@@ -56,7 +56,7 @@ describe('Testando a tela de Login', () => {
         userEvent.click(buttonPlay);
         await waitFor(() => {
             const { pathname } = history.location;
-            console.log(pathname);
+            // console.log(pathname);
             expect(pathname).toBe('/game')
         });       
     });
