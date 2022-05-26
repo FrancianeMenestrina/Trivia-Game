@@ -62,7 +62,7 @@ class Game extends Component {
     const { soma } = this.state;
     this.setState({
       soma: soma + 1,
-    }, () => this.ordemAleatoria());
+    }, () => this.pageFeedback());
     this.setState({ css: false, countDown: 30, btnNext: false });
     this.questionTimer();
   }
@@ -116,6 +116,18 @@ class Game extends Component {
       return sum;
     }
   }
+
+  pageFeedback = () => {
+    const { soma } = this.state;
+    const { history } = this.props;
+    const numberFive = 5;
+
+    if (soma === numberFive) {
+      history.push('/feedback');
+    } else {
+      this.ordemAleatoria();
+    }
+  };
 
   render() {
     const data = JSON.parse(localStorage.getItem('ranking'));
