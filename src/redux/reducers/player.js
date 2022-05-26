@@ -1,11 +1,12 @@
-import { REQUEST_API, ERROR, REQUEST_CODE } from '../actions/index';
+import { REQUEST_API, ERROR, REQUEST_CODE, RETURN_SCORE_TOTAL } from '../actions/index';
 
 const INITIAL_STATE = {
   questions: [],
+  score: 0,
   response_code: '',
 };
 
-const playerReducer = (state = INITIAL_STATE, action) => {
+const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case REQUEST_API:
     return {
@@ -19,9 +20,14 @@ const playerReducer = (state = INITIAL_STATE, action) => {
     };
   case ERROR:
     return 'Deu erro na API';
+  case RETURN_SCORE_TOTAL:
+    return {
+      ...state,
+      score: action.scoreTotal,
+    };
   default:
     return state;
   }
 };
 
-export default playerReducer;
+export default player;
