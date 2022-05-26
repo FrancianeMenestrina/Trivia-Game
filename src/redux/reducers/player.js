@@ -1,9 +1,11 @@
-import { REQUEST_API, ERROR, REQUEST_CODE, RETURN_SCORE_TOTAL } from '../actions/index';
+import { REQUEST_API, ERROR, REQUEST_CODE,
+  RETURN_SCORE_TOTAL, ACERTOS } from '../actions/index';
 
 const INITIAL_STATE = {
   questions: [],
   score: 0,
   response_code: '',
+  acertos: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -17,6 +19,11 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       response_code: action.returnAPICode,
+    };
+  case ACERTOS:
+    return {
+      ...state,
+      acertos: action.acertos,
     };
   case ERROR:
     return 'Deu erro na API';

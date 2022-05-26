@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actionRequestApi, actionScoreTotal } from '../redux/actions';
+import { actionRequestApi, actionScoreTotal, actionAcertos } from '../redux/actions';
 import Questions from '../components/Questions';
 
 class Game extends Component {
@@ -16,6 +16,7 @@ class Game extends Component {
       btnNext: false,
       css: false,
       somaTotal: 0,
+      corretas: 0,
     };
   }
 
@@ -96,6 +97,13 @@ class Game extends Component {
     const numberGeneric = 10;
 
     if (value === questions[soma].correct_answer) {
+      const { acertosFunc } = this.props;
+      this.setState((estadoAnterior) => ({
+        corretas: estadoAnterior.corretas + 1,
+      }), () => {
+        const { corretas } = this.state;
+        acertosFunc(corretas);
+      });
       if (difficult === 'hard') {
         difficultPoint = difficultHard;
       }
@@ -173,6 +181,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   returnApiFunc: () => dispatch(actionRequestApi()),
   scoreTotalFunc: (scoreTotal) => dispatch(actionScoreTotal(scoreTotal)),
+  acertosFunc: (acertos) => dispatch(actionAcertos(acertos)),
 });
 
 Game.propTypes = {
@@ -183,6 +192,7 @@ Game.propTypes = {
   }).isRequired,
   scoreTotalFunc: PropTypes.func.isRequired,
   scoreTotal: PropTypes.string.isRequired,
+  acertosFunc: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
