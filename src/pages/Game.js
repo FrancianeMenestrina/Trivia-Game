@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { actionRequestApi } from '../redux/actions';
+import { actionRequestApi, actionScoreTotal } from '../redux/actions';
 import Questions from '../components/Questions';
 
 class Game extends Component {
@@ -15,6 +15,7 @@ class Game extends Component {
       over: false,
       btnNext: false,
       css: false,
+      somaTotal: 0,
     };
   }
 
@@ -39,9 +40,11 @@ class Game extends Component {
     clearInterval(this.intervalId);
   }
 
-  handleOnClick = () => {
+  handleOnClick = ({ target }) => {
     this.setState({ css: true, btnNext: true });
     clearInterval(this.intervalId);
+    const { value } = target;
+    this.sumScore(value);
   }
 
   ordemAleatoria = () => {
@@ -81,9 +84,42 @@ class Game extends Component {
     }
   }
 
+  sumScore = (value) => {
+    const { countDown, soma } = this.state;
+    const { questions } = this.props;
+    let sum = 0;
+    const difficult = questions[soma].difficulty;
+    let difficultPoint = 0;
+    const difficultHard = 3;
+    const difficultMedium = 2;
+    const difficultEasy = 1;
+    const numberGeneric = 10;
+
+    if (value === questions[soma].correct_answer) {
+      if (difficult === 'hard') {
+        difficultPoint = difficultHard;
+      }
+      if (difficult === 'medium') {
+        difficultPoint = difficultMedium;
+      }
+      if (difficult === 'easy') {
+        difficultPoint = difficultEasy;
+      }
+      sum += (numberGeneric + (countDown * difficultPoint));
+      this.setState((prevState) => ({
+        somaTotal: prevState.somaTotal + sum,
+      }), () => {
+        const { somaTotal } = this.state;
+        const { scoreTotalFunc } = this.props;
+        scoreTotalFunc(somaTotal);
+      });
+      return sum;
+    }
+  }
+
   render() {
     const data = JSON.parse(localStorage.getItem('ranking'));
-    const { questions } = this.props;
+    const { questions, scoreTotal } = this.props;
     const { soma, css, disable, respostas, btnNext, over, countDown } = this.state;
     return (
       <div>
@@ -95,7 +131,7 @@ class Game extends Component {
           data-testid="header-profile-picture"
         />
         <p data-testid="header-player-name">{ data[0].name }</p>
-        <p data-testid="header-score">{ data[0].score }</p>
+        <p data-testid="header-score">{ scoreTotal }</p>
         <div>
           <Questions
             questions={ questions[soma] }
@@ -116,12 +152,15 @@ class Game extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  questions: state.playerReducer.questions,
-  responseCode: state.playerReducer.response_code,
+  questions: state.player.questions,
+  responseCode: state.player.response_code,
+  acumuladora: state.player.acumuladora,
+  scoreTotal: state.player.score,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   returnApiFunc: () => dispatch(actionRequestApi()),
+  scoreTotalFunc: (scoreTotal) => dispatch(actionScoreTotal(scoreTotal)),
 });
 
 Game.propTypes = {
@@ -130,6 +169,8 @@ Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  scoreTotalFunc: PropTypes.func.isRequired,
+  scoreTotal: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

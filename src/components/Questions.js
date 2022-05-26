@@ -3,18 +3,9 @@ import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 
 class Questions extends Component {
-  // constructor() {
-  //   super();
-
-  //   this.state = {
-
-  //   };
-  // }
-
   render() {
     const { questions, onClickNext, handleOnClick,
       css, disable, btnNext, countDown, over, respostas } = this.props;
-      // console.log(questions);
     return (
       <div>
         {!questions ? null : (
@@ -31,6 +22,7 @@ class Questions extends Component {
                       key={ index }
                       disabled={ disable }
                       data-testid="correct-answer"
+                      value={ resposta }
                       onClick={ handleOnClick }
                       style={
                         css
@@ -46,6 +38,7 @@ class Questions extends Component {
                       key={ index }
                       disabled={ disable }
                       data-testid={ `wrong-answer-${index}` }
+                      value={ resposta }
                       onClick={ handleOnClick }
                       style={
                         css ? { border: '3px solid red' } : { color: 'black' }
@@ -72,9 +65,9 @@ class Questions extends Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   questionsTest: state.playerReducer.questions,
-// });
+/* const mapStateToProps = (state) => ({
+  scoreTotal: state.playerReducer.player.score,
+}); */
 
 Questions.propTypes = {
   questions: PropTypes.shape({
