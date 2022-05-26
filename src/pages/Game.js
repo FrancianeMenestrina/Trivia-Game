@@ -19,19 +19,11 @@ class Game extends Component {
   }
 
   async componentDidMount() {
-    const { returnApiFunc, history } = this.props;
+    const { returnApiFunc } = this.props;
     await returnApiFunc();
-    // caso pense em algo, refazer a parte do token invalido.
-    const token = localStorage.getItem('token');
-    if (token === 'INVALID_TOKEN') {
-      localStorage.removeItem('token');
-      history.push('/');
-    }
+    this.tokenValidation();
     this.ordemAleatoria();
-    const ONE_SECOND = 1000;
-    this.intervalId = setInterval(() => {
-      this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
-    }, ONE_SECOND);
+    this.questionTimer();
   }
 
   componentDidUpdate() {
@@ -55,9 +47,6 @@ class Game extends Component {
   ordemAleatoria = () => {
     const { questions } = this.props;
     const { soma } = this.state;
-    if (!questions) {
-      return null;
-    }
     const arrayAnswers = [questions[soma].correct_answer,
       ...questions[soma].incorrect_answers];
     const ZERO_CINCO = 0.5;
@@ -72,15 +61,28 @@ class Game extends Component {
       soma: soma + 1,
     }, () => this.ordemAleatoria());
     this.setState({ css: false, countDown: 30, btnNext: false });
+    this.questionTimer();
+  }
+
+  questionTimer = () => {
     const ONE_SECOND = 1000;
     this.intervalId = setInterval(() => {
       this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
     }, ONE_SECOND);
   }
 
+  // caso pense em algo, refazer a parte do token invalido.
+  tokenValidation = () => {
+    const { history } = this.props;
+    const token = localStorage.getItem('token');
+    if (token === 'INVALID_TOKEN') {
+      localStorage.removeItem('token');
+      history.push('/');
+    }
+  }
+
   render() {
     const data = JSON.parse(localStorage.getItem('ranking'));
-    // console.log('data', data);
     const { questions } = this.props;
     const { soma, css, disable, respostas, btnNext, over, countDown } = this.state;
     return (
@@ -124,7 +126,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 Game.propTypes = {
   returnApiFunc: PropTypes.func.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  questions: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,

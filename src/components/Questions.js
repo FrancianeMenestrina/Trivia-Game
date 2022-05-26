@@ -14,6 +14,7 @@ class Questions extends Component {
   render() {
     const { questions, onClickNext, handleOnClick,
       css, disable, btnNext, countDown, over, respostas } = this.props;
+      // console.log(questions);
     return (
       <div>
         {!questions ? null : (
@@ -76,12 +77,12 @@ class Questions extends Component {
 // });
 
 Questions.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.shape({
+  questions: PropTypes.shape({
     category: PropTypes.string,
     question: PropTypes.string,
     correct_answer: PropTypes.string,
-    incorrect_answers: PropTypes.arrayOf(),
-  })).isRequired,
+    incorrect_answers: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
   respostas: PropTypes.arrayOf(PropTypes.string).isRequired,
   onClickNext: PropTypes.func.isRequired,
   handleOnClick: PropTypes.func.isRequired,
@@ -89,7 +90,7 @@ Questions.propTypes = {
   disable: PropTypes.bool.isRequired,
   btnNext: PropTypes.bool.isRequired,
   countDown: PropTypes.number.isRequired,
-  over: PropTypes.string.isRequired,
+  over: PropTypes.bool.isRequired,
 };
 
 export default Questions;
