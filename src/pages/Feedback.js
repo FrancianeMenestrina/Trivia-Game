@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-class FeedBack extends Component {
+class Feedback extends Component {
   onClickPlayAgain = () => {
     const { history } = this.props;
     history.push('/');
@@ -18,7 +18,7 @@ class FeedBack extends Component {
     const { scoreTotal, acertos, returnName, returnPicture } = this.props;
     return (
       <>
-        <p>FeedBack</p>
+        <p>Feedback</p>
         <header>
           <img
             src={ returnPicture }
@@ -60,7 +60,7 @@ const mapStateToProps = (state) => ({
   returnPicture: state.player.picture,
 });
 
-FeedBack.propTypes = {
+Feedback.propTypes = {
   scoreTotal: PropTypes.string.isRequired,
   acertos: PropTypes.string.isRequired,
   history: PropTypes.shape({
@@ -70,4 +70,4 @@ FeedBack.propTypes = {
   returnPicture: PropTypes.string.isRequired,
 };
 
-export default connect(mapStateToProps)(FeedBack);
+export default connect(mapStateToProps)(Feedback);
