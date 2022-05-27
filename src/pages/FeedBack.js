@@ -8,6 +8,11 @@ class FeedBack extends Component {
     history.push('/');
   }
 
+  onClickRanking = () => {
+    const { history } = this.props;
+    history.push('/ranking');
+  }
+
   render() {
     const data = JSON.parse(localStorage.getItem('ranking'));
     const numberThree = 3;
@@ -34,6 +39,13 @@ class FeedBack extends Component {
             data-testid="btn-play-again"
           >
             Play Again
+          </button>
+          <button
+            type="button"
+            onClick={ this.onClickRanking }
+            data-testid="btn-ranking"
+          >
+            Ranking
           </button>
         </header>
 
