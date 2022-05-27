@@ -138,19 +138,18 @@ class Game extends Component {
   };
 
   render() {
-    const data = JSON.parse(localStorage.getItem('ranking'));
-    const { questions, scoreTotal } = this.props;
+    const { questions, scoreTotal, returnName, returnPicture } = this.props;
     const { soma, css, disable, respostas, btnNext, over, countDown } = this.state;
     return (
       <div>
         <header />
         <h1>GAME</h1>
         <img
-          src={ data[0].picture }
+          src={ returnPicture }
           alt="Imagem-Token"
           data-testid="header-profile-picture"
         />
-        <p data-testid="header-player-name">{ data[0].name }</p>
+        <p data-testid="header-player-name">{ returnName }</p>
         <p data-testid="header-score">{ scoreTotal }</p>
         <div>
           <Questions
@@ -175,6 +174,8 @@ const mapStateToProps = (state) => ({
   questions: state.player.questions,
   responseCode: state.player.response_code,
   scoreTotal: state.player.score,
+  returnName: state.player.name,
+  returnPicture: state.player.picture,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -192,6 +193,8 @@ Game.propTypes = {
   scoreTotalFunc: PropTypes.func.isRequired,
   scoreTotal: PropTypes.string.isRequired,
   acertosFunc: PropTypes.func.isRequired,
+  returnName: PropTypes.string.isRequired,
+  returnPicture: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

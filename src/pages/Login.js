@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
+import { actionSaveEmail, actionSavePicture, actionSaveName } from '../redux/actions';
 
 class Login extends Component {
   constructor() {
@@ -21,9 +23,11 @@ class Login extends Component {
     const response = await fetch('https://opentdb.com/api_token.php?command=request');
     const data = await response.json();
     const { name, gravatarEmail } = this.state;
-
+    const { returnEmail, returnName, returnPicture } = this.props;
+    returnEmail(gravatarEmail);
+    returnName(name);
     const criptoEmail = md5(gravatarEmail).toString();
-
+    returnPicture(`https://www.gravatar.com/avatar/${criptoEmail}`);
     localStorage.setItem('ranking', JSON.stringify([
       {
         name,
@@ -92,11 +96,19 @@ class Login extends Component {
     );
   }
 }
+const mapDispatchToProps = (dispatch) => ({
+  returnEmail: (email) => dispatch(actionSaveEmail(email)),
+  returnName: (name) => dispatch(actionSaveName(name)),
+  returnPicture: (picture) => dispatch(actionSavePicture(picture)),
+});
 
 Login.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
+  returnEmail: PropTypes.func.isRequired,
+  returnName: PropTypes.func.isRequired,
+  returnPicture: PropTypes.func.isRequired,
 };
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);

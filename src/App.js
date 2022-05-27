@@ -4,7 +4,7 @@ import logo from './trivia.png';
 import Login from './pages/Login';
 import Game from './pages/Game';
 import Settings from './pages/Settings';
-import FeedBack from './pages/FeedBack';
+import FeedBack from './pages/Feedback';
 import Ranking from './pages/Ranking';
 import './App.css';
 
