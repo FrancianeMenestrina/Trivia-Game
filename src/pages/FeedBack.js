@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class FeedBack extends Component {
+  onClickPlayAgain = () => {
+    const { history } = this.props;
+    history.push('/');
+  }
+
   render() {
     const data = JSON.parse(localStorage.getItem('ranking'));
     const numberThree = 3;
@@ -23,6 +28,13 @@ class FeedBack extends Component {
           { acertos >= numberThree && (<p data-testid="feedback-text">Well Done!</p>)}
           { acertos < numberThree && (
             <p data-testid="feedback-text">Could be better...</p>)}
+          <button
+            type="button"
+            onClick={ this.onClickPlayAgain }
+            data-testid="btn-play-again"
+          >
+            Play Again
+          </button>
         </header>
 
       </>
@@ -38,6 +50,9 @@ const mapStateToProps = (state) => ({
 FeedBack.propTypes = {
   scoreTotal: PropTypes.string.isRequired,
   acertos: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 export default connect(mapStateToProps)(FeedBack);
