@@ -18,6 +18,8 @@ class FeedBack extends Component {
           />
           <p data-testid="header-player-name">{data[0].name}</p>
           <p data-testid="header-score">{scoreTotal}</p>
+          <p data-testid="feedback-total-score">{scoreTotal}</p>
+          <p data-testid="feedback-total-question">{acertos}</p>
           { acertos >= numberThree && (<p data-testid="feedback-text">Well Done!</p>)}
           { acertos < numberThree && (
             <p data-testid="feedback-text">Could be better...</p>)}
@@ -30,7 +32,7 @@ class FeedBack extends Component {
 
 const mapStateToProps = (state) => ({
   scoreTotal: state.player.score,
-  acertos: state.player.acertos,
+  acertos: state.player.assertions,
 });
 
 FeedBack.propTypes = {

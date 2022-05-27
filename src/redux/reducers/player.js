@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   questions: [],
   score: 0,
   response_code: '',
-  acertos: 0,
+  assertions: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -23,7 +23,7 @@ const player = (state = INITIAL_STATE, action) => {
   case ACERTOS:
     return {
       ...state,
-      acertos: action.acertos,
+      assertions: action.acertos,
     };
   case ERROR:
     return 'Deu erro na API';

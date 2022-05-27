@@ -174,7 +174,6 @@ class Game extends Component {
 const mapStateToProps = (state) => ({
   questions: state.player.questions,
   responseCode: state.player.response_code,
-  acumuladora: state.player.acumuladora,
   scoreTotal: state.player.score,
 });
 
