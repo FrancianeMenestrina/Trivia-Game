@@ -132,10 +132,35 @@ class Game extends Component {
 
     if (soma === numberFive) {
       history.push('/feedback');
+      this.saveLocalStorage();
     } else {
       this.ordemAleatoria();
     }
   };
+
+  saveLocalStorage = () => {
+    const { returnName, scoreTotal, returnPicture } = this.props;
+
+    const ranking = JSON.parse(localStorage.getItem('ranking'));
+
+    if (!ranking) {
+      localStorage.setItem('ranking', JSON.stringify([
+        {
+          name: returnName,
+          score: scoreTotal,
+          picture: returnPicture,
+        },
+      ]));
+    } else {
+      localStorage.setItem('ranking', JSON.stringify([...ranking,
+        {
+          name: returnName,
+          score: scoreTotal,
+          picture: returnPicture,
+        },
+      ]));
+    }
+  }
 
   render() {
     const { questions, scoreTotal, returnName, returnPicture } = this.props;

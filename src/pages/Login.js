@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
-import { actionSaveEmail, actionSavePicture, actionSaveName } from '../redux/actions';
+import { actionSaveEmail, actionSavePicture,
+  actionSaveName, actionScoreTotal } from '../redux/actions';
 
 class Login extends Component {
   constructor() {
@@ -12,6 +13,11 @@ class Login extends Component {
       gravatarEmail: '',
       buttonDisable: true,
     };
+  }
+
+  componentDidMount() {
+    const { returnScoreTotal } = this.props;
+    returnScoreTotal(0);
   }
 
   handleChange = ({ target }) => {
@@ -28,13 +34,6 @@ class Login extends Component {
     returnName(name);
     const criptoEmail = md5(gravatarEmail).toString();
     returnPicture(`https://www.gravatar.com/avatar/${criptoEmail}`);
-    localStorage.setItem('ranking', JSON.stringify([
-      {
-        name,
-        score: 0,
-        picture: `https://www.gravatar.com/avatar/${criptoEmail}`,
-      },
-    ]));
     localStorage.setItem('token', data.token);
     const { history } = this.props;
     history.push('/game');
@@ -100,6 +99,7 @@ const mapDispatchToProps = (dispatch) => ({
   returnEmail: (email) => dispatch(actionSaveEmail(email)),
   returnName: (name) => dispatch(actionSaveName(name)),
   returnPicture: (picture) => dispatch(actionSavePicture(picture)),
+  returnScoreTotal: (score) => dispatch(actionScoreTotal(score)),
 });
 
 Login.propTypes = {
@@ -109,6 +109,7 @@ Login.propTypes = {
   returnEmail: PropTypes.func.isRequired,
   returnName: PropTypes.func.isRequired,
   returnPicture: PropTypes.func.isRequired,
+  returnScoreTotal: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);
