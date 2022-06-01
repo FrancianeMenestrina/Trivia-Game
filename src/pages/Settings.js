@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import logo from '../trivia.png';
+import './Settings.css';
 
 class Settings extends Component {
   render() {
     return (
-      <h1 data-testid="settings-title">Settings</h1>
+      <div className="App-gamer">
+        <img src={ logo } className="App-logo-game" alt="logo" />
+        <h1 data-testid="settings-title" className="settings">- Settings -</h1>
+      </div>
     );
   }
 }

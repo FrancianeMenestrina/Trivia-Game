@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Orbitron:wght@500&display=swap');
+
+.div-font{
+    font-family: 'Electrolize', sans-serif;
+}
+
+.div-time{
+    font-family: 'Orbitron', sans-serif;
+    color: red;
+}
+
+.p-gameOver{
+    font-size: 50px;
+}
+
+.btn-answer{
+    border-radius: 5px;
+    border: 0px;
+    margin-left: 15px;
+    margin-right: 15px;
+    min-width: 200px;
+    font-size: 20px;
+}
+
+.div-answers{
+    display: flex;
+    width: 1500px;
+    justify-content: center;
+}
+
+.div-next{
+    display: flex;
+    margin-top: 15px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-next{
+    width: 100px;
+    height: 40px;
+    font-size: 20px;
+    background-color: #7f5af0;
+    color: #fffffe;
+    border-radius: 5px;
+    border: 0px;
+    font-family: 'Electrolize', sans-serif;
+    box-shadow: 1px 1px 2px 2px hsl(240, 1%, 21%);
+    cursor: pointer;
+    text-align: center;
+} 
+
+.btn-next:hover {
+    background-color: #5233b1;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px black;
+    color: black;
+}
+
+.card-game{
+    height: 400px;
+    padding-top: 80px;
+    margin-top: 35px;
+    border: 0.5px solid white;
+    justify-content: space-evenly;
+    background-color: hsl(216, 13%, 15%);
+    border-radius: 20px;
+    box-shadow: 3px 3px 4px 4px hsl(240, 1%, 21%);
+}
+
+.header-game{
+    display: flex;
+    width: 100vw;
+    height: 60px;
+    margin-top: 0;
+    padding-top: 10px;
+    justify-content: space-between;
+    padding-right: 100px;
+    padding-left: 10px;
+    align-items: center;
+    background-color: #72757e;
+    color: black;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 25px;
+}
+.image-gravatar{
+    border-radius: 10px;
+    border: 0.5px solid white;
+    width: 50px;
+    margin-bottom: 10px;
+}

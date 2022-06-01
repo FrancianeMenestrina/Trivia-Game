@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
+
+.ranking{
+    font-size: 50px;
+    font-family: 'Electrolize', sans-serif;
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
+
+.btn-inicio{
+    height: 35px;
+    width: 150px;
+    font-size: 20px;
+    background-color: #7f5af0;
+    color: #fffffe;
+    border-radius: 5px;
+    border: 0px;
+    font-family: 'Electrolize', sans-serif;
+    box-shadow: 1px 1px 2px 2px hsl(240, 1%, 21%);
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.btn-inicio:hover {
+    background-color: #5233b1;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px black;
+    color: black;
+}
+
+.div-ranking{
+    display: flex;
+    width: 65vw;
+    height: 60px;
+    margin-top: 0;
+    padding-top: 10px;
+    justify-content: space-between;
+    padding-right: 100px;
+    padding-left: 10px;
+    align-items: center;
+    background-color: #72757e;
+    color: black;
+    font-family: 'Comfortaa', cursive;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 80%;
+    margin-top: 10px;
+    border: 0.5px solid white;
+    box-shadow: 3px 3px 4px 4px hsl(240, 1%, 21%);
+}

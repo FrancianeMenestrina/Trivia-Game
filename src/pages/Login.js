@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
 // import { Button } from 'reactstrap';
 import { actionSaveEmail, actionSavePicture,
-  actionSaveName, actionScoreTotal } from '../redux/actions';
+  actionSaveName, actionScoreTotal, actionAcertos } from '../redux/actions';
 import './Login.css';
+import logo from '../trivia.png';
 
 // const { Jumbotron } = ReactBootstrap;
 
@@ -20,8 +21,9 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    const { returnScoreTotal } = this.props;
+    const { returnScoreTotal, returnAcertos } = this.props;
     returnScoreTotal(0);
+    returnAcertos(0);
   }
 
   handleChange = ({ target }) => {
@@ -56,7 +58,8 @@ class Login extends Component {
     const { buttonDisable } = this.state;
     const { history } = this.props;
     return (
-      <main>
+      <main className="App-header">
+        <img src={ logo } className="App-logo" alt="logo" />
         <form className="form-login">
           <div className="div-name">
             <label htmlFor="name" className="input-login">
@@ -115,6 +118,7 @@ const mapDispatchToProps = (dispatch) => ({
   returnName: (name) => dispatch(actionSaveName(name)),
   returnPicture: (picture) => dispatch(actionSavePicture(picture)),
   returnScoreTotal: (score) => dispatch(actionScoreTotal(score)),
+  returnAcertos: (acertos) => dispatch(actionAcertos(acertos)),
 });
 
 Login.propTypes = {
@@ -125,6 +129,7 @@ Login.propTypes = {
   returnName: PropTypes.func.isRequired,
   returnPicture: PropTypes.func.isRequired,
   returnScoreTotal: PropTypes.func.isRequired,
+  returnAcertos: PropTypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

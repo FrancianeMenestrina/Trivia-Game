@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { actionRequestApi, actionScoreTotal, actionAcertos } from '../redux/actions';
 import Questions from '../components/Questions';
+import logo from '../trivia.png';
 
 class Game extends Component {
   constructor() {
@@ -166,16 +167,18 @@ class Game extends Component {
     const { questions, scoreTotal, returnName, returnPicture } = this.props;
     const { soma, css, disable, respostas, btnNext, over, countDown } = this.state;
     return (
-      <div>
-        <header />
-        <h1>GAME</h1>
-        <img
-          src={ returnPicture }
-          alt="Imagem-Token"
-          data-testid="header-profile-picture"
-        />
-        <p data-testid="header-player-name">{ returnName }</p>
-        <p data-testid="header-score">{ scoreTotal }</p>
+      <div className="App-gamer">
+        <header className="header-game">
+          <img
+            src={ returnPicture }
+            alt="Imagem-Token"
+            className="image-gravatar"
+            data-testid="header-profile-picture"
+          />
+          <p data-testid="header-player-name">{ `Player:   ${returnName}` }</p>
+          <p data-testid="header-score">{ `Score: ${scoreTotal}` }</p>
+        </header>
+        <img src={ logo } className="App-logo-game" alt="logo" />
         <div>
           <Questions
             questions={ questions[soma] }
