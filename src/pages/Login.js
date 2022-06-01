@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import md5 from 'crypto-js/md5';
+// import { Button } from 'reactstrap';
 import { actionSaveEmail, actionSavePicture,
   actionSaveName, actionScoreTotal } from '../redux/actions';
+import './Login.css';
+
+// const { Jumbotron } = ReactBootstrap;
 
 class Login extends Component {
   constructor() {
@@ -53,43 +57,54 @@ class Login extends Component {
     const { history } = this.props;
     return (
       <main>
-        <h2>Login</h2>
-        <form>
-          <label htmlFor="name">
-            Nome:
-            <input
-              id="name"
-              name="name"
-              type="text"
-              data-testid="input-player-name"
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="gravatarEmail">
-            Email:
-            <input
-              id="gravatarEmail"
-              name="gravatarEmail"
-              type="email"
-              data-testid="input-gravatar-email"
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            type="button"
-            data-testid="btn-play"
-            disabled={ buttonDisable }
-            onClick={ this.handleButton }
-          >
-            Play
-          </button>
-          <button
-            type="button"
-            data-testid="btn-settings"
-            onClick={ () => { history.push('/settings'); } }
-          >
-            Settings
-          </button>
+        <form className="form-login">
+          <div className="div-name">
+            <label htmlFor="name" className="input-login">
+              Nome:
+              <input
+                id="name"
+                name="name"
+                type="text"
+                data-testid="input-player-name"
+                onChange={ this.handleChange }
+                className="form-control"
+              />
+            </label>
+          </div>
+          <div className="div-email">
+            <label htmlFor="gravatarEmail" className="input-login">
+              Email:
+              <input
+                id="gravatarEmail"
+                name="gravatarEmail"
+                type="email"
+                data-testid="input-gravatar-email"
+                onChange={ this.handleChange }
+                className="form-control input-login"
+              />
+            </label>
+          </div>
+          <div className="button-play">
+            <button
+              type="button"
+              data-testid="btn-play"
+              disabled={ buttonDisable }
+              onClick={ this.handleButton }
+              className="btn-play"
+            >
+              Play
+            </button>
+          </div>
+          <div className="button-settings">
+            <button
+              type="button"
+              className="btn-settings"
+              data-testid="btn-settings"
+              onClick={ () => { history.push('/settings'); } }
+            >
+              Settings
+            </button>
+          </div>
         </form>
       </main>
     );
