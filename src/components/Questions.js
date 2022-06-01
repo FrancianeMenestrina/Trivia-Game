@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
+import he from 'he';
 
 class Questions extends Component {
   render() {
@@ -12,41 +13,42 @@ class Questions extends Component {
           <div>
             <p>{ over ? 'Game Over' : countDown }</p>
             <p data-testid="question-category">{questions.category}</p>
-            <p data-testid="question-text">{questions.question}</p>
+            <p data-testid="question-text">{he.decode(questions.question)}</p>
             <div data-testid="answer-options">
               {
                 respostas.map(
-                  (resposta, index) => (questions.correct_answer === resposta ? (
-                    <button
-                      type="button"
-                      key={ index }
-                      disabled={ disable }
-                      data-testid="correct-answer"
-                      value={ resposta }
-                      onClick={ handleOnClick }
-                      style={
-                        css
-                          ? { border: '3px solid rgb(6, 240, 15)' }
-                          : { color: 'black' }
-                      }
-                    >
-                      {resposta}
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      key={ index }
-                      disabled={ disable }
-                      data-testid={ `wrong-answer-${index}` }
-                      value={ resposta }
-                      onClick={ handleOnClick }
-                      style={
-                        css ? { border: '3px solid red' } : { color: 'black' }
-                      }
-                    >
-                      {resposta}
-                    </button>
-                  )),
+                  (resposta, index) => (questions.correct_answer === resposta
+                    ? (
+                      <button
+                        type="button"
+                        key={ index }
+                        disabled={ disable }
+                        data-testid="correct-answer"
+                        value={ resposta }
+                        onClick={ handleOnClick }
+                        style={
+                          css
+                            ? { border: '3px solid rgb(6, 240, 15)' }
+                            : { color: 'black' }
+                        }
+                      >
+                        {he.decode(resposta)}
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        key={ index }
+                        disabled={ disable }
+                        data-testid={ `wrong-answer-${index}` }
+                        value={ resposta }
+                        onClick={ handleOnClick }
+                        style={
+                          css ? { border: '3px solid red' } : { color: 'black' }
+                        }
+                      >
+                        {he.decode(resposta)}
+                      </button>
+                    )),
                 )
               }
             </div>
