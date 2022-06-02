@@ -1,73 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap') ;
 
-.btn-play-feedback{
-    height: 35px;
-    width: 150px;
-    font-size: 20px;
-    background-color:#2cb67d;
-    color: #fffffe;
-    border-radius: 5px;
-    border: 0px;
-    font-family: 'Electrolize', sans-serif;
-    box-shadow: 1px 1px 2px 2px hsl(240, 1%, 21%);
-    cursor: pointer;
-    margin-top: 30px;
+.btn-play-feedback {
+  background-color: #2cb67d;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px 2px hsl(240, 1%, 21%);
+  color: #fffffe;
+  cursor: pointer;
+  font-family: Electrolize , sans-serif;
+  font-size: 20px;
+  height: 35px;
+  width: 100px;
 }
 
 .btn-play-feedback:hover {
-    background-color: #1a5f42;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 3px 3px 5px black;
-    color: black;
+  background-color: #1a5f42;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px black;
+  color: black;
 }
 
-.btn-ranking{
-    height: 35px;
-    width: 150px;
-    font-size: 20px;
-    background-color: #7f5af0;
-    color: #fffffe;
-    border-radius: 5px;
-    border: 0px;
-    font-family: 'Electrolize', sans-serif;
-    box-shadow: 1px 1px 2px 2px hsl(240, 1%, 21%);
-    cursor: pointer;
-    margin-top: 15px;
+.btn-ranking {
+  background-color: #7f5af0;
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px 2px hsl(240, 1%, 21%);
+  color: #fffffe;
+  cursor: pointer;
+  font-family: Electrolize , sans-serif;
+  font-size: 20px;
+  height: 35px;
+  margin-top: 15px;
+  width: 150px;
 }
 
 .btn-ranking:hover {
-    background-color: #5233b1;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 3px 3px 5px black;
-    color: black;
+  background-color: #5233b1;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px black;
+  color: black;
 }
 
-.font-geral{
-    font-size: 30px;
-    font-family: 'Electrolize', sans-serif;    
+.font-geral {
+  font-family: Electrolize , sans-serif;
+  font-size: 30px;
 }
 
-.card-feedback{
-    display: flex;
-    flex-direction: column;
-    height: 500px;
-    width: 400px;
-    margin-top: 15px;
-    border: 0.5px solid white;
-    justify-content: space-evenly;
-    background-color: hsl(216, 13%, 15%);
-    border-radius: 20px;
-    box-shadow: 3px 3px 4px 4px hsl(240, 1%, 21%);
-    align-items: center;
+.card-feedback {
+  align-items: center;
+  background-color: hsl(216, 13%, 15%);
+  border: 0.5px solid white;
+  border-radius: 20px;
+  box-shadow: 3px 3px 4px 4px hsl(240, 1%, 21%);
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: space-evenly;
+  margin-top: 15px;
+  width: 400px;
+
 }
 
-.div-feedback{
-    margin-top: 25px;
+.div-feedback {
+  margin-top: 25px;
 }
 
-.feedback{
-    font-size: 50px;
-    font-family: 'Electrolize', sans-serif;    
+.feedback {
+  font-family: Electrolize , sans-serif;
+  font-size: 50px;
 }

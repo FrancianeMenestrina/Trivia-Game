@@ -15,8 +15,8 @@ body {
 
 .App-logo-game {
   height: 15vmin;
-  pointer-events: none;
   margin-top: 50px;
+  pointer-events: none;
 }
 
 .red-border {
@@ -37,6 +37,7 @@ body {
     animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   }
 }
+
 .App-header {
   align-items: center;
   background-color: #282c34;
