@@ -1,4 +1,4 @@
-# Project Trivia
+# Trivia Project 
 # Contexto
 Nesse projeto desenvolvemos um jogo de perguntas e respostas baseado no jogo Trivia (tipo um show do milhão americano) utilizando React e Redux. A partir das demandas, temos uma aplicação onde a pessoa usuária poderá:
 - Logar no jogo e, se o email tiver cadastro no site Gravatar, ter sua foto associada ao perfil da pessoa usuária.
