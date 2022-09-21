@@ -11,7 +11,7 @@ Front-end:
 > Desenvolvido usando: React, Redux, RTL (React Testing Library)
 ## Instalando Dependências
 ```bash
-cd Project-Trivia
+cd Trivia-Game
 npm install
 ```
 ## Executando aplicação
